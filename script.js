@@ -4,8 +4,8 @@ let autoScrolling = false;
 let timelinePhotos = [];
 let galleryPhotos = [];
 
-// Data de início do relacionamento
-const startDate = new Date('2023-03-27');
+// Data de início do relacionamento (baseado na primeira viagem)
+const startDate = new Date('2024-05-11');
 
 // Event listener principal
 document.addEventListener('DOMContentLoaded', function() {
@@ -35,50 +35,41 @@ function updateCountdown() {
 }
 
 function loadTimelinePhotos() {
+    // Fotos correspondentes à timeline do HTML
     timelinePhotos = [
         { 
-            src: 'https://raw.githubusercontent.com/walas199922/anniversary-project/main/public/images/1.jpg',
-            title: '27/03/2023',
-            description: 'O nosso primeiro encontro'
+            src: 'https://raw.githubusercontent.com/walas199922/anniversary-project/main/public/imagens/img_um.jpeg',
+            title: '11/05/2024',
+            description: 'Nossa Primeira Viagem - Nossa primeira viagem juntos, quando as coisas nem se quer eram oficiais, estávamos apenas curtindo o momento e seguindo a vida'
         },
         {
-            src: 'https://raw.githubusercontent.com/walas199922/anniversary-project/main/public/images/2.jpg',
-            title: '01/04/2023',
-            description: 'Nossa primeira foto juntos'
+            src: 'https://raw.githubusercontent.com/walas199922/anniversary-project/main/public/imagens/img_dois.jpeg',
+            title: '22/07/2024',
+            description: 'Primeira Pescaria Juntos - Aqui as coisas mudaram totalmente, fizemos nossa primeira pescaria. Mostrei a você um dos meus hobbies favoritos e você embarcou nessa onda comigo'
         },
         {
-            src: 'https://raw.githubusercontent.com/walas199922/anniversary-project/main/public/images/3.jpg',
-            title: '15/04/2023',
-            description: 'Primeiro passeio especial'
+            src: 'https://raw.githubusercontent.com/walas199922/anniversary-project/main/public/imagens/img_tres.jpeg',
+            title: '21/12/2024',
+            description: 'Show do Pai Chris - Esse, sem sombras de dúvidas foi um dos melhores momentos que tivemos juntos. O show do pai chris foi muito doido e mais uma vez, você me apoiou e incentivou a ir ver um artista que eu gosto bastante. Acredito que esse tenha sido um dos dias mais significantes e legais da nossa caminhada até aqui.'
         },
         {
-            src: 'https://raw.githubusercontent.com/walas199922/anniversary-project/main/public/images/4.jpg',
-            title: '30/04/2023',
-            description: 'Um mês de amor'
+            src: 'https://raw.githubusercontent.com/walas199922/anniversary-project/main/public/imagens/img_quatro.jpeg',
+            title: '31/12/2024',
+            description: 'O Golpe do Ano Novo - "Se não virarmos o ano namorando, você fica para trás, pois eu renovo tudo na minha vida", essa foi a frase mais vagabunda que vc me disse, mudou o ano e você só aplicou o golpe mesmo, mas no final das contas, valeu a pena.'
         },
         {
-            src: 'https://raw.githubusercontent.com/walas199922/anniversary-project/main/public/images/5.jpg',
-            title: '27/05/2023',
-            description: 'Dois meses juntos'
+            src: 'https://raw.githubusercontent.com/walas199922/anniversary-project/main/public/imagens/img_cinco.jpeg',
+            title: '24/03/2025',
+            description: 'Viagem Oficial - Nesse ponto, tudo era oficial e fizemos uma incrível viagem. Fiquei com o pé atrás, mas você me convenceu que seria uma experiência boa, e no final das contas você estava certa. Viver isso ao seu lado foi muito gratificante.'
         },
         {
-            src: 'https://raw.githubusercontent.com/walas199922/anniversary-project/main/public/images/6.jpg',
-            title: '27/06/2023',
-            description: 'Três meses de felicidade'
-        },
-        {
-            src: 'https://raw.githubusercontent.com/walas199922/anniversary-project/main/public/images/7.jpg',
-            title: '27/07/2023',
-            description: 'Quatro meses incríveis'
-        },
-        {
-            src: 'https://raw.githubusercontent.com/walas199922/anniversary-project/main/public/images/8.jpg',
-            title: '27/08/2023',
-            description: 'Cinco meses de amor verdadeiro'
+            src: 'https://raw.githubusercontent.com/walas199922/anniversary-project/main/public/imagens/img_seis.jpeg',
+            title: '14/06/2025',
+            description: 'Mundo Agitado - Nesse momento, eu queria levar você para um lado do meu mundo mais "agitado" totalmente diferente da calmaria que é a pesca, e como previsto, você detestou música eletrônica. O que restam são risadas e traumas'
         }
     ];
     
-    updateTimelineDisplay();
+    setupTimelineClicks();
 }
 
 function loadGalleryPhotos() {
@@ -111,27 +102,30 @@ function initializeTimeline() {
     });
 }
 
-function updateTimelineDisplay() {
-    const timeline = document.querySelector('.timeline');
-    if (!timeline) return;
+function setupTimelineClicks() {
+    // Configurar cliques na timeline existente no HTML
+    const timelineItems = document.querySelectorAll('.clickable-timeline-item');
     
-    timeline.innerHTML = '';
-    
-    timelinePhotos.forEach((photo, index) => {
-        const photoDiv = document.createElement('div');
-        photoDiv.className = 'timeline-photo';
-        if (index === currentIndex) photoDiv.classList.add('active');
+    timelineItems.forEach((item, index) => {
+        item.addEventListener('click', function() {
+            const photoIndex = parseInt(this.getAttribute('data-photo-index'));
+            if (timelinePhotos[photoIndex]) {
+                const photo = timelinePhotos[photoIndex];
+                openPhotoModal(photo.src, photo.title, photo.description);
+            }
+        });
         
-        photoDiv.innerHTML = `
-            <img src="${photo.src}" alt="${photo.title}" onclick="openPhotoModal('${photo.src}', '${photo.title}', '${photo.description}')">
-            <div class="timeline-info">
-                <h4>${photo.title}</h4>
-                <p>${photo.description}</p>
-            </div>
-        `;
-        
-        timeline.appendChild(photoDiv);
+        // Adicionar estilo de cursor pointer
+        item.style.cursor = 'pointer';
     });
+    
+    console.log('✅ Timeline clicks configurados para', timelineItems.length, 'itens');
+}
+
+function updateTimelineDisplay() {
+    // Esta função agora não faz nada porque a timeline é estática no HTML
+    // Mantemos para compatibilidade
+    console.log('Timeline display já está no HTML');
 }
 
 function startAutoScroll() {
@@ -188,25 +182,27 @@ function openPhotoModal(src, title, description) {
     console.log('📸 Abrindo modal:', title);
     
     const modal = document.getElementById('photoModal');
-    const modalImg = document.getElementById('modalImage');
-    const modalTitle = document.getElementById('modalTitle');
-    const modalDesc = document.getElementById('modalDescription');
+    const modalImg = document.getElementById('currentPhoto');
     
     if (!modal) {
         console.error('❌ Modal não encontrado!');
         return;
     }
     
+    if (!modalImg) {
+        console.error('❌ Imagem do modal não encontrada!');
+        return;
+    }
+    
     // Configurar conteúdo
     modalImg.src = src;
-    modalTitle.textContent = title || '';
-    modalDesc.textContent = description || '';
+    modalImg.alt = `${title} - ${description}`;
     
     // Mostrar modal
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden';
     
-    console.log('✅ Modal aberto!');
+    console.log('✅ Modal aberto com sucesso!');
 }
 
 function closePhotoModal() {
@@ -230,20 +226,16 @@ function openGalleryPhoto(index) {
 
 // Event listeners para fechar modal
 document.addEventListener('DOMContentLoaded', function() {
-    // Fechar ao clicar no X
-    const closeBtn = document.getElementById('closeModal');
+    // Fechar ao clicar no botão de fechar (que já tem onclick no HTML)
+    const closeBtn = document.getElementById('fecharBtn');
     if (closeBtn) {
-        closeBtn.onclick = closePhotoModal;
+        console.log('✅ Botão de fechar encontrado no HTML');
     }
     
-    // Fechar ao clicar no overlay
+    // Fechar ao clicar no overlay (que já tem onclick no HTML)
     const modal = document.getElementById('photoModal');
     if (modal) {
-        modal.onclick = function(e) {
-            if (e.target === modal) {
-                closePhotoModal();
-            }
-        };
+        console.log('✅ Modal encontrado');
     }
     
     // Fechar com ESC
@@ -252,6 +244,8 @@ document.addEventListener('DOMContentLoaded', function() {
             closePhotoModal();
         }
     });
+    
+    console.log('✅ Event listeners configurados');
 });
 
 // Função para abrir seção

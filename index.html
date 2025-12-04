@@ -147,31 +147,6 @@
         ">
     </div>
 
-    <!-- BOTÃO DE TESTE TEMPORÁRIO -->
-    <button onclick="
-        document.getElementById('fotoSimples').src = 'https://raw.githubusercontent.com/Walas199922/anniversary-project/2a710c127f409f6984d1b9943083abbcc94e39a1/img_um.jpeg';
-        document.getElementById('modalSimples').style.display = 'block';
-    " style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: green; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">
-        🧪 MODAL SIMPLES
-    </button>
-
-    <!-- BOTÃO DE TESTE TEMPORÁRIO -->
-    <button onclick="
-        console.log('🧪 TESTE: Abrindo modal...');
-        var modal = document.getElementById('photoModal');
-        var img = document.getElementById('currentPhoto');
-        if (modal && img) {
-            img.src = 'https://raw.githubusercontent.com/Walas199922/anniversary-project/2a710c127f409f6984d1b9943083abbcc94e39a1/img_um.jpeg';
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-            console.log('✅ Modal aberto para teste!');
-        } else {
-            console.error('❌ Elementos não encontrados:', {modal: !!modal, img: !!img});
-        }
-    " style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: blue; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">
-        🧪 TESTAR MODAL
-    </button>
-
     <!-- Modal com galeria de fotos -->
     <div class="modal" id="photoModal" style="display: none;">
         <div class="modal-content">
