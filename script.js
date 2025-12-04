@@ -1,3 +1,21 @@
+// Função para iniciar a jornada
+function startJourney() {
+    console.log('🎬 Iniciando jornada...');
+    
+    const welcomeModal = document.getElementById('welcomeModal');
+    const mainContent = document.getElementById('mainContent');
+    
+    if (welcomeModal) {
+        welcomeModal.style.display = 'none';
+    }
+    
+    if (mainContent) {
+        mainContent.classList.remove('main-content-hidden');
+    }
+    
+    console.log('✅ Jornada iniciada!');
+}
+
 // Variáveis globais
 let currentIndex = 0;
 let autoScrolling = false;
