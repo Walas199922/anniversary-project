@@ -1,4 +1,4 @@
-                                                                                                                                                                                                                                                                                                                                                <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
@@ -110,96 +110,12 @@
         </div>
     </div>
 
-    <!-- MODAL SUPER SIMPLES PARA TESTE -->
-    <div id="modalSimples" style="
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background: rgba(0,0,0,0.9);
-        z-index: 9999;
-    ">
-        <button onclick="document.getElementById('modalSimples').style.display='none'" style="
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background: red;
-            color: white;
-            border: none;
-            padding: 20px 40px;
-            font-size: 24px;
-            font-weight: bold;
-            border-radius: 15px;
-            cursor: pointer;
-            z-index: 10000;
-        ">
-            ✕ FECHAR
-        </button>
-        <img id="fotoSimples" src="" style="
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            max-width: 90%;
-            max-height: 90%;
-        ">
-    </div>
-
-    <!-- BOTÃO DE TESTE TEMPORÁRIO -->
-    <button onclick="
-        document.getElementById('fotoSimples').src = 'https://raw.githubusercontent.com/Walas199922/anniversary-project/2a710c127f409f6984d1b9943083abbcc94e39a1/img_um.jpeg';
-        document.getElementById('modalSimples').style.display = 'block';
-    " style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: green; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">
-        🧪 MODAL SIMPLES
-    </button>
-
-    <!-- BOTÃO DE TESTE TEMPORÁRIO -->
-    <button onclick="
-        console.log('🧪 TESTE: Abrindo modal...');
-        var modal = document.getElementById('photoModal');
-        var img = document.getElementById('currentPhoto');
-        if (modal && img) {
-            img.src = 'https://raw.githubusercontent.com/Walas199922/anniversary-project/2a710c127f409f6984d1b9943083abbcc94e39a1/img_um.jpeg';
-            modal.style.display = 'block';
-            document.body.style.overflow = 'hidden';
-            console.log('✅ Modal aberto para teste!');
-        } else {
-            console.error('❌ Elementos não encontrados:', {modal: !!modal, img: !!img});
-        }
-    " style="position: fixed; bottom: 20px; left: 20px; z-index: 9999; background: blue; color: white; padding: 10px; border: none; border-radius: 5px; cursor: pointer;">
-        🧪 TESTAR MODAL
-    </button>
-
     <!-- Modal com galeria de fotos -->
-    <div class="modal" id="photoModal" style="display: none;">
+    <div class="modal" id="photoModal">
         <div class="modal-content">
-            <!-- BOTÃO ULTRA SIMPLES -->
-            <button 
-                id="fecharBtn" 
-                style="position: fixed; top: 20px; right: 20px; z-index: 9999; background: red; color: white; border: none; padding: 15px 30px; font-size: 18px; font-weight: bold; border-radius: 10px; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.5);"
-                onclick="
-                    document.getElementById('photoModal').style.display = 'none';
-                    document.body.style.overflow = 'auto';
-                    console.log('✅ Foto fechada!');
-                    var prevBtn = document.getElementById('prevPhoto');
-                    var nextBtn = document.getElementById('nextPhoto');
-                    var dots = document.getElementById('galleryDots');
-                    if (prevBtn) prevBtn.style.display = 'block';
-                    if (nextBtn) nextBtn.style.display = 'block';
-                    if (dots) dots.style.display = 'flex';
-                ">
-                ✕ FECHAR FOTO
-            </button>
+            <button class="close-btn" id="closeModal">&times;</button>
             
-            <div class="gallery-container" 
-                 onclick="
-                    if (event.target === this) {
-                        document.getElementById('photoModal').style.display = 'none';
-                        document.body.style.overflow = 'auto';
-                    }
-                 ">
+            <div class="gallery-container">
                 <button class="nav-btn prev-btn" id="prevPhoto">
                     <svg viewBox="0 0 24 24" fill="currentColor">
                         <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
