@@ -591,19 +591,23 @@ function startRelationshipCounter() {
         const now = new Date();
         const diff = now - relationshipStart;
         
-        // Calcular tempo total
-        const totalDays = Math.floor(diff / (1000 * 60 * 60 * 24));
-        const totalHours = Math.floor(diff / (1000 * 60 * 60));
-        const totalMinutes = Math.floor(diff / (1000 * 60));
+        // Calcular apenas os dias completos
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        
+        // Calcular as horas restantes do dia atual (0-23)
+        const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        
+        // Calcular os minutos restantes da hora atual (0-59)
+        const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
         
         // Atualizar elementos na página
         const daysEl = document.getElementById('counter-days');
         const hoursEl = document.getElementById('counter-hours');
         const minutesEl = document.getElementById('counter-minutes');
         
-        if (daysEl) daysEl.textContent = totalDays;
-        if (hoursEl) hoursEl.textContent = totalHours.toLocaleString();
-        if (minutesEl) minutesEl.textContent = totalMinutes.toLocaleString();
+        if (daysEl) daysEl.textContent = days;
+        if (hoursEl) hoursEl.textContent = hours;
+        if (minutesEl) minutesEl.textContent = minutes;
     }
     
     // Atualizar imediatamente e depois a cada minuto
