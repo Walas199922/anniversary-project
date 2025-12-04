@@ -140,9 +140,9 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Inicializar elementos globais do DOM
     modal = document.getElementById('photoModal');
-    modalImage = document.getElementById('modalImage');
+    modalImage = document.getElementById('currentPhoto');
     captionText = document.getElementById('caption');
-    closeBtn = document.querySelector('.close');
+    closeBtn = document.getElementById('closeModal');
     galleryDots = document.querySelector('.gallery-dots');
     audioPlayer = document.getElementById('bgMusic') || document.getElementById('audioPlayer');
     
@@ -190,6 +190,19 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }, 6000); // Após o modal + um pouco mais
     }
+    
+    // Configurar eventos do modal de fotos
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeModalFunc);
+    }
+    
+    if (modal) {
+        modal.addEventListener('click', (e) => {
+            if (e.target === modal) {
+                closeModalFunc();
+            }
+        });
+    }
 });
 
 // Criar pontos da galeria
@@ -216,9 +229,16 @@ function openModal() {
 function closeModalFunc() {
     modal.style.display = 'none';
     document.body.style.overflow = 'auto';
+    
+    // Restaurar controles de navegação quando fechar
+    const prevBtn = document.getElementById('prevPhoto');
+    const nextBtn = document.getElementById('nextPhoto');
+    const dots = document.getElementById('galleryDots');
+    
+    if (prevBtn) prevBtn.style.display = 'block';
+    if (nextBtn) nextBtn.style.display = 'block';
+    if (dots) dots.style.display = 'flex';
 }
-
-closeModal.addEventListener('click', closeModalFunc);
 
 modal.addEventListener('click', (e) => {
     if (e.target === modal) {
@@ -728,12 +748,8 @@ function initClickableTimeline() {
             const photoIndex = parseInt(item.getAttribute('data-photo-index'));
             // Verificar se a foto está disponível na lista de fotos disponíveis
             if (photoIndex >= 0 && photoIndex < availablePhotos.length) {
-                // Abrir modal e mostrar foto específica
-                currentPhotoIndex = photoIndex;
-                updatePhoto();
-                
-                // Garantir que o modal seja aberto
-                modal.style.display = 'block';
+                // Abrir modal mostrando APENAS a foto específica
+                openPhotoModal(photoIndex);
                 
                 // Adicionar feedback visual ao clique
                 item.style.transform = 'scale(0.98)';
@@ -746,4 +762,29 @@ function initClickableTimeline() {
         // Adicionar classe para indicar que é clicável
         item.classList.add('clickable-timeline-item');
     });
+}
+
+// Função para abrir modal com foto específica da timeline
+function openPhotoModal(photoIndex) {
+    const photo = availablePhotos[photoIndex];
+    if (!photo || !modal || !modalImage) return;
+    
+    // Configurar a foto no modal
+    modalImage.src = photo.src;
+    modalImage.alt = photo.caption || 'Foto do casal';
+    
+    // ESCONDER os controles de navegação e dots para mostrar apenas esta foto
+    const prevBtn = document.getElementById('prevPhoto');
+    const nextBtn = document.getElementById('nextPhoto');
+    const dots = document.getElementById('galleryDots');
+    
+    if (prevBtn) prevBtn.style.display = 'none';
+    if (nextBtn) nextBtn.style.display = 'none';
+    if (dots) dots.style.display = 'none';
+    
+    // Abrir o modal
+    modal.style.display = 'block';
+    document.body.style.overflow = 'hidden';
+    
+    console.log(`📷 Abrindo foto ${photoIndex + 1}: ${photo.caption}`);
 }
