@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Aniversário 💕</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Fundo espacial animado -->
+    <div class="space-background">
+        <div class="stars"></div>
+        <div class="stars2"></div>
+        <div class="stars3"></div>
+        <div class="shooting-stars" id="shootingStars"></div>
+    </div>
+
+    <!-- Modal de Boas-vindas -->
+    <div class="welcome-modal" id="welcomeModal">
+        <div class="welcome-content">
+            <h2>Essa é uma humilde lembrança do meu amor por você. Espero que goste 🌹</h2>
+            <button class="welcome-btn" id="startJourneyBtn" onclick="startJourney()">Clique aqui</button>
+        </div>
+    </div>
+
+    <!-- Conteúdo principal -->
+    <div class="container main-content-hidden" id="mainContent">
+        <!-- Contador de Relacionamento -->
+        <div class="relationship-counter">
+            <h2>Nosso Tempo Juntos </h2>
+            <div class="counter-display">
+                <div class="counter-item">
+                    <span class="counter-number" id="counter-days">0</span>
+                    <span class="counter-label">Dias</span>
+                </div>
+                <div class="counter-item">
+                    <span class="counter-number" id="counter-hours">0</span>
+                    <span class="counter-label">Horas</span>
+                </div>
+                <div class="counter-item">
+                    <span class="counter-number" id="counter-minutes">0</span>
+                    <span class="counter-label">Minutos</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Timeline de Momentos Especiais -->
+        <div class="timeline-section" id="timelineSection">
+            <h2 class="timeline-title">Nossa Jornada de Amor 💕</h2>
+            <div class="timeline">
+                <div class="timeline-item clickable-timeline-item" data-date="11-05-2024" data-photo-index="0">
+                    <div class="timeline-content">
+                        <h3>Nossa Primeira Viagem</h3>
+                        <p>Nossa primeira viagem juntos, quando as coisas nem se quer eram oficiais, estávamos apenas curtindo o momento e seguindo a vida</p>
+                        <span class="click-hint">Clique para ver a foto 📸</span>
+                    </div>
+                </div>
+                <div class="timeline-item clickable-timeline-item" data-date="22-07-2024" data-photo-index="1">
+                    <div class="timeline-content">
+                        <h3>Primeira Pescaria Juntos</h3>
+                        <p>Aqui as coisas mudaram totalmente, fizemos nossa primeira pescaria. Mostrei a você um dos meus hobbies favoritos e você embarcou nessa onda comigo</p>
+                        <span class="click-hint">Clique para ver a foto 📸</span>
+                    </div>
+                </div>
+                <div class="timeline-item clickable-timeline-item" data-date="21-12-2024" data-photo-index="2">
+                    <div class="timeline-content">
+                        <h3>Show do Pai Chris</h3>
+                        <p>Esse, sem sombras de dúvidas foi um dos melhores momentos que tivemos juntos. O show do pai chris foi muito doido e mais uma vez, você me apoiou e incentivou a ir ver um artista que eu gosto bastante. Acredito que esse tenha sido um dos dias mais significantes e legais da nossa caminhada até aqui.</p>
+                        <span class="click-hint">Clique para ver a foto 📸</span>
+                    </div>
+                </div>
+                <div class="timeline-item clickable-timeline-item" data-date="31-12-2024" data-photo-index="3">
+                    <div class="timeline-content">
+                        <h3>O Golpe do Ano Novo</h3>
+                        <p>"Se não virarmos o ano namorando, você fica para trás, pois eu renovo tudo na minha vida", essa foi a frase mais vagabunda que vc me disse, mudou o ano e você só aplicou o golpe mesmo, mas no final das contas, valeu a pena.</p>
+                        <span class="click-hint">Clique para ver a foto 📸</span>
+                    </div>
+                </div>
+                <div class="timeline-item clickable-timeline-item" data-date="24-03-2025" data-photo-index="4">
+                    <div class="timeline-content">
+                        <h3>Viagem Oficial</h3>
+                        <p>Nesse ponto, tudo era oficial e fizemos uma incrível viagem. Fiquei com o pé atrás, mas você me convenceu que seria uma experiência boa, e no final das contas você estava certa. Viver isso ao seu lado foi muito gratificante.</p>
+                        <span class="click-hint">Clique para ver a foto 📸</span>
+                    </div>
+                </div>
+                <div class="timeline-item clickable-timeline-item" data-date="14-06-2025" data-photo-index="5">
+                    <div class="timeline-content">
+                        <h3>Mundo Agitado</h3>
+                        <p>Nesse momento, eu queria levar você para um lado do meu mundo mais "agitado" totalmente diferente da calmaria que é a pesca, e como previsto, você detestou música eletrônica. O que restam são risadas e traumas</p>
+                        <span class="click-hint">Clique para ver a foto 📸</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Seção de Recados -->
+        <div class="messages-section">
+            <h2>Nossos Recados 💌</h2>
+            <div class="messages-container">
+                <!-- As mensagens serão carregadas dinamicamente via JavaScript -->
+            </div>
+            <div class="add-message">
+                <input type="text" placeholder="Seu nome" id="messageAuthor" class="author-input">
+                <textarea placeholder="Deixe um recado carinhoso..." id="messageInput"></textarea>
+                <button type="submit" id="messageForm">Enviar Recado 💕</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal com galeria de fotos -->
+    <div class="modal" id="photoModal">
+        <div class="modal-content">
+            <button class="close-btn" id="closeModal">&times;</button>
+            
+            <div class="gallery-container">
+                <button class="nav-btn prev-btn" id="prevPhoto">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+                    </svg>
+                </button>
+                
+                <div class="photo-slide">
+                    <img src="" alt="Foto do casal" id="currentPhoto">
+                </div>
+                
+                <button class="nav-btn next-btn" id="nextPhoto">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/>
+                    </svg>
+                </button>
+            </div>
+            
+            <div class="gallery-dots" id="galleryDots"></div>
+        </div>
+    </div>
+
+    <!-- Audio element -->
+    <audio id="audioPlayer" preload="auto" loop>
+        <source src="https://raw.githubusercontent.com/Walas199922/anniversary-project/e879051c1627c509a16f2ddcb1f823f8d8b73466/Arlindo%20Cruz%20-%20O%20Que%20%C3%89%20O%20Amor.mp3" type="audio/mpeg">
+        Seu navegador não suporta o elemento de áudio.
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
